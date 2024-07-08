@@ -1,0 +1,4 @@
+#!/usr/bin/fish
+
+swaymsg -mt subscribe (jo -a (string split ',' $argv[1])) \
+    | jq --unbuffered -r -L $__fish_config_dir/functions "include \"sway\"; $(jq-str change $argv[2..])"
