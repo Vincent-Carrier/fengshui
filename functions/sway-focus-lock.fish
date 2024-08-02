@@ -1,14 +1,5 @@
 function sway-focus-lock
-    notify-send 'LOCK START'
-    set id (sway-focused id)
-    sway-sub window,binding change binding.command \
-        | while read change cmd
-        switch $change
-            case focus
-                swaymsg "[con_id=$id] focus"
-            case run
-                string match -qr '\bfocus\b' "$cmd" && break
-        end
-    end
-    notify-send 'LOCK END'
+    notify-send -t 1000 'FOCUS LOCK'
+    set app_id (sway-focused app_id)
+    swaymsg no_focus "[app_id=$app_id]"
 end
